@@ -6,10 +6,14 @@ const userRouter = require('./router/userRoutes');
 
 const app = express();
 
-// 1) MIDDLEWAREs
-// A step a request goes through before it gets processed.
+// 1) MIDDLEWARES
+console.log(process.env.NODE_ENV);
+if (process.env.NODE_ENV === 'development') {
+  app.use(morgan('dev'));
+}
+
 app.use(express.json());
-app.use(morgan('dev'));
+app.use(express.static(`${__dirname}/public`));
 
 app.use((req, res, next) => {
   console.log('Hello from the middleware');

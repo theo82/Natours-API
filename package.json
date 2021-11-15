@@ -4,12 +4,13 @@
   "description": "Learning nodejs",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon server.js"
+    "start:dev": "nodemon server.js",
+    "start:prod": "NODE_ENV=production node server.js"
   },
   "author": "Theodosios Tziomakas",
   "license": "ISC",
   "dependencies": {
+    "dotenv": "^10.0.0",
     "express": "^4.17.1",
     "morgan": "^1.10.0"
   }
