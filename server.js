@@ -1,8 +1,9 @@
-const app = require('./app');
 const mongoose = require('mongoose');
-const dotenv = require('dotenv');
 
+const dotenv = require('dotenv');
 dotenv.config({ path: './config.env' });
+
+const app = require('./app');
 
 const DB = process.env.DATABASE.replace(
   '<PASSWORD>',
@@ -18,7 +19,7 @@ mongoose
     useUnifiedTopology: true,
   })
   .then((con) => {
-    console.log('DB connections successfully !!');
+    console.log('DB connections successfull!');
   })
   .catch((err) => {
     console.log(err);
