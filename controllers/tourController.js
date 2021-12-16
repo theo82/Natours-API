@@ -1,8 +1,14 @@
 const Tour = require('./../models/tourModel');
 
+exports.aliasTopTours = (req, res, next) => {
+  req.query.limit = '5';
+  req.query.sort = '-ratingsAverage, price';
+  req.query.fields = 'name, price, ratingsAverage, summary, difficulty';
+  next();
+};
+
 exports.getAllTours = async (req, res) => {
   try {
-    console.log(req.query);
     // BUILD QEURY
     //1A) Filtering
     const queryObj = { ...req.query };
@@ -25,7 +31,6 @@ exports.getAllTours = async (req, res) => {
     // 2) Sorting
     if (req.query.sort) {
       const sortBy = req.query.sort.split(',').join(' ');
-      console.log(sortBy);
       query = query.sort(sortBy);
     } else {
       query = query.sort('-createAt');
@@ -70,7 +75,6 @@ exports.getAllTours = async (req, res) => {
 };
 
 exports.getTour = async (req, res) => {
-  console.log(req.params);
   try {
     const tour = await Tour.findById(req.params.id);
     res.status(200).json({
@@ -90,7 +94,6 @@ exports.getTour = async (req, res) => {
 exports.createTour = async (req, res) => {
   try {
     const newTour = await Tour.create(req.body);
-    console.log(req.body);
     res.status(201).json({
       status: 'success',
       data: {
